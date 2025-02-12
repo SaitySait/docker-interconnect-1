@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app1:
+    build: ./app1
+    container_name: app1
+    networks:
+      - app_network
+    ports:
+      - "5000:5000"
+
+  app2:
+    build: ./app2
+    container_name: app2
+    networks:
+      - app_network
+    ports:
+      - "5001:5001"
+    depends_on:
+      - app1  # Ensures app1 starts before app2
+
+networks:
+  app_network:
+    driver: bridge  # Creates a custom network for communication
