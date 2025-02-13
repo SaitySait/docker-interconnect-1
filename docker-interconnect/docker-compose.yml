@@ -19,6 +19,16 @@ services:
     depends_on:
       - app1  # Ensures app1 starts before app2
 
+  app3:
+    build: ./app3
+    container_name: app3
+    networks:
+      - app_network
+    ports:
+      - "5002:5002"
+    depends_on:
+      - app1  # Ensures app1 starts before app2
+
 networks:
   app_network:
     driver: bridge  # Creates a custom network for communication
